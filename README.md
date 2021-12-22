@@ -1,3 +1,3 @@
 # FlappyBird
 Remake Flappy Bird by Java.
-- [release](https://github.com/harmonly/FlappyBird/releases)
+- [pre-release](https://github.com/harmonly/FlappyBird/releases)
