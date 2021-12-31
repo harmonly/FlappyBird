@@ -32,7 +32,7 @@ public class Pillar {
         if (--x == -width) {
             x = distance * 2 - width / 2;
             y_up = rand.nextInt(151) - 200;
-            y_down = y_up + rand.nextInt(150) + 100 + 250;
+            y_down = y_up + rand.nextInt(100) + 150 + 250;
         }
     }
 

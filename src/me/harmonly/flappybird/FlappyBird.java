@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -209,6 +211,28 @@ public class FlappyBird extends JPanel {
         frame.setSize(384, 448 + 64 + 37);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                game.bird.flappy();
+                //播放弹跳音乐
+                game.executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            URL cb;
+                            File f = new File(getClass().getClassLoader().getResource("jump.wav").getPath());
+                            cb = f.toURL();
+                            AudioClip aau;
+                            aau = Applet.newAudioClip(cb);//加载音频
+                            aau.play(); //播放音频
+                        } catch (MalformedURLException m) {
+                            m.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
         frame.setResizable(false);
         frame.setVisible(true);
         game.run();
