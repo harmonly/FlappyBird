@@ -17,10 +17,7 @@ import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-//游戏界面
 public class FlappyBird extends JPanel {
-
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     private BufferedImage background;
     private BufferedImage startImage;
@@ -72,25 +69,7 @@ public class FlappyBird extends JPanel {
                             state = State.START;
                         }
                     }
-                    case RUNNING -> {
-                        bird.flappy();
-                        //播放弹跳音乐
-                        executor.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    URL cb;
-                                    File f = new File(getClass().getClassLoader().getResource("jump.wav").getPath());
-                                    cb = f.toURL();
-                                    AudioClip aau;
-                                    aau = Applet.newAudioClip(cb);//加载音频
-                                    aau.play(); //播放音频
-                                } catch (MalformedURLException m) {
-                                    m.printStackTrace();
-                                }
-                            }
-                        });
-                    }
+                    case RUNNING -> bird.flappy();
                 }
             }
         });
@@ -215,22 +194,6 @@ public class FlappyBird extends JPanel {
             @Override
             public void keyTyped(KeyEvent e) {
                 game.bird.flappy();
-                //播放弹跳音乐
-                game.executor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            URL cb;
-                            File f = new File(getClass().getClassLoader().getResource("jump.wav").getPath());
-                            cb = f.toURL();
-                            AudioClip aau;
-                            aau = Applet.newAudioClip(cb);//加载音频
-                            aau.play(); //播放音频
-                        } catch (MalformedURLException m) {
-                            m.printStackTrace();
-                        }
-                    }
-                });
             }
         });
         frame.setResizable(false);
