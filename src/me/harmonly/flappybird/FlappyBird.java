@@ -193,7 +193,8 @@ public class FlappyBird extends JPanel {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                game.bird.flappy();
+                if (e.getKeyCode() == KeyEvent.VK_SPACE)
+                    game.bird.flappy();
             }
         });
         frame.setResizable(false);
