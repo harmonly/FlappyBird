@@ -47,7 +47,14 @@ public class FlappyBird extends JPanel {
         score = 0;
         best = score;
         state = State.START;
-
+        setFocusable(true);
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (state == State.RUNNING && e.getKeyCode() == KeyEvent.VK_SPACE)
+                    bird.flappy();
+            }
+        });
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -190,13 +197,6 @@ public class FlappyBird extends JPanel {
         frame.setSize(384, 448 + 64 + 37);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE)
-                    game.bird.flappy();
-            }
-        });
         frame.setResizable(false);
         frame.setVisible(true);
         game.run();
